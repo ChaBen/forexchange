@@ -1,0 +1,53 @@
+<template>
+  <div :class="switchClass" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate">
+    <div class="bootstrap-switch-container" @click="triggerToggle()">
+      <span class="bootstrap-switch-handle-on ">
+        <slot name="on">
+          {{ onText }}
+        </slot>
+      </span>
+      <span class="bootstrap-switch-label" />
+      <span class="bootstrap-switch-handle-off bootstrap-switch-default">
+        <slot name="off">
+          {{ offText }}
+        </slot>
+      </span>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: 'NSwitch',
+  props: {
+    value: [Array, Boolean],
+    onText: String,
+    offText: String
+  },
+  computed: {
+    switchClass() {
+      const base = 'bootstrap-switch-'
+      const state = this.model ? 'on' : 'off'
+      const classes = base + state
+      return classes
+    },
+    model: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit('input', value)
+      }
+    }
+  },
+  methods: {
+    triggerToggle() {
+      this.model = !this.model
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+  @import "~@/assets/sass/now-ui-kit/variables";
+  @import "~@/assets/sass/now-ui-kit/plugins/plugin-bootstrap-switch";
+</style>
+

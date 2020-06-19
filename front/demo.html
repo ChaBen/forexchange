@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Richiesta password</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript">
+      window.addEventListener('message', function (e) {
+       var mainWindow = e.source;
+       var result = '';
+       try {
+         result = eval(e.data);
+       } catch (e) {
+         result = 'eval() threw an exception.';
+       }
+       mainWindow.postMessage(result, event.origin);
+     });
+    </script>
+</head>
+<body>
+    <div>type the password <input type="password" name="picchio" id="picchio"><input type="button" value="ok?" onclick="andiamo();"></div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"
+            integrity="sha256-Dul4c09cdrWKXVtallPxF558lwxMwCC8dXJdZ0PVW54=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.10/pako.min.js"
+            integrity="sha256-Kc+gVCuYZLZkDP3MjxWxhNtkMbUy2ycCo86X5fKn/Bw=" crossorigin="anonymous"></script>
+</head>
+<body>
+<script>
+
+
+  // 解压
+  function unzip(key) {
+    // 将二进制字符串转换为字符数组
+    var charData = key.split('').map(function(x) {
+      return x.charCodeAt(0);
+    });
+    console.log('压缩后的文件大小:', charData.join(','));
+
+    // 将数字数组转换成字节数组
+    var binData = new Uint8Array(charData);
+
+    // 解压
+    var data = pako.inflate(binData);
+
+    // 将GunZip ByTAREAR转换回ASCII字符串
+    key = String.fromCharCode.apply(null, new Uint16Array(data));
+
+    //unescape(str)  --->解压后解码，防止中午乱码
+    return unescape(key);
+  }
+
+  var socket = io('http://127.0.0.1:3000?token=admin520');
+  const symbol = 'BTC';
+  const resolution = '1';
+
+  socket.on('exception', function(res) {
+    console.log('exception event:', res)
+  });
+  socket.on('connect', function() {
+    console.log('Connected');
+    socket.emit('events', { test: 'test' });
+    socket.emit('identity', 0, response =>
+      console.log('Identity:', response),
+    );
+    socket.emit('bars', {
+      symbol,
+      resolution,
+      from: 1589893413,
+      to: 1589993413,
+    }, res => {
+
+      const msg = pako.inflate(res, {
+        to: 'string',
+      });
+    //  console.log('bars:', msg);
+    });
+
+    socket.emit('tick', symbol, res => {
+
+      const msg = pako.inflate(res, {
+        to: 'string',
+      });
+      console.log('tick:', msg);
+    });
+    socket.emit('subscribe', {
+      symbol,
+      resolution,
+    });
+
+    /*setTimeout(() => {
+      socket.emit('unsubscribe', {
+        symbol,
+        resolution,
+      });
+    }, 2000);*/
+    setTimeout(() => {
+      socket.emit('order', {
+        symbol,
+        side: 'up',
+        adjust: 1,
+        pwd: 'abcd'
+      });
+    }, 5000);
+  });
+  socket.on('message', (data) => {
+    const msg = pako.inflate(data, {
+      to: 'string',
+    });
+    document.write('message:', msg, '<br>');
+    console.log('message', msg);
+  });
+  socket.on('events', function(data) {
+    console.log('event', data);
+  });
+  socket.on('exception', function(data) {
+    console.log('event', data);
+  });
+  socket.on('disconnect', function() {
+    console.log('Disconnected');
+  });
+  /*;*/
+</script>
+</body>
+</html>

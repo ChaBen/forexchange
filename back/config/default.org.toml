@@ -1,0 +1,35 @@
+# 配置文件
+
+###
+### [ws]
+### ws配置
+###
+[ws]
+  # api url
+  url = 'ws://118.190.243.214:10141/connect/json'
+  # token
+  token = 'xxxxx'
+  # 虚拟订单密码
+  orderPwd = 'abcd'
+
+###
+### [rest]
+### rest配置
+###
+[rest]
+  # api url
+  url = 'http://map.konpn.com:10002/localrm/query'
+  # token
+  token = 'xxxxx'
+
+###
+### [mysql]
+### mysql
+###
+[mysql]
+  host = "127.0.0.1"
+  port = 3306
+  username = "root"
+  password = "Qwer1234"
+  database = "kline"
+  logging = false
