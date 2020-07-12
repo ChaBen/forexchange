@@ -10,7 +10,7 @@ export default {
 
   }),
   mounted() {
-    window.socket = io('http://127.0.0.1:3000?token=admin520&symbol=BTC')
+    window.socket = io('http://167.179.111.229:3000?token=admin520&symbol=BTC')
 
     window.socket.on('exception', function(res) {
       console.log('exception event:', res)
