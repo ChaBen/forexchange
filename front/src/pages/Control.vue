@@ -43,13 +43,11 @@ export default {
     }
   }),
   methods: {
-    symbolChange() {
-      window.socket = ''
-      window.socket = io(`http://167.179.111.229:3000?token=admin520&symbol=${this.symbol}`)
-    },
     upControl() {
+      window.socket = ''
+      window.socket = io(`http://167.179.111.229:3000?token=admin520&symbol=BTC`)
       window.socket.emit('order', {
-        symbol: this.symbol,
+        symbol: BTC,
         side: 'up',
         adjust: 0.0001,
         pwd: 'Admin520'
@@ -57,8 +55,10 @@ export default {
       window.alert('매수 성공')
     },
     downControl() {
+      window.socket = ''
+      window.socket = io(`http://167.179.111.229:3000?token=admin520&symbol=BTC`)
       window.socket.emit('order', {
-        symbol: this.symbol,
+        symbol: BTC,
         side: 'down',
         adjust: 0.0001,
         pwd: 'Admin520'
