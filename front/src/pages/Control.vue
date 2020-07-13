@@ -49,7 +49,7 @@ export default {
       window.socket.emit('order', {
         symbol: 'BTC',
         side: 'up',
-        adjust: 0.0001,
+        adjust: 1,
         pwd: 'Admin520'
       })
       window.alert('매수 성공')
@@ -60,7 +60,7 @@ export default {
       window.socket.emit('order', {
         symbol: 'BTC',
         side: 'down',
-        adjust: 0.0001,
+        adjust: 1,
         pwd: 'Admin520'
       })
       window.alert('매도 성공')
