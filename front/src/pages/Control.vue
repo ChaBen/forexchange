@@ -10,12 +10,12 @@
     <div class="row">
       <div class="col-md-6">
         <card class="text-center">
-          <button :disabled="symbol === ''" class="btn btn-danger btn-lg" @click="upControl">매수</button>
+          <button class="btn btn-danger btn-lg" @click="upControl">매수</button>
         </card>
       </div>
       <div class="col-md-6">
         <card class="text-center">
-          <button :disabled="symbol === ''" class="btn btn-info btn-lg" @click="downControl">매도</button>
+          <button class="btn btn-info btn-lg" @click="downControl">매도</button>
         </card>
       </div>
     </div>
@@ -37,7 +37,7 @@ export default {
     [Option.name]: Option
   },
   data: () => ({
-    symbol: '',
+    symbol: 'BTC',
     singleSelect: {
       options: [{ value: 'BTC' }, { value: 'ETH' }, { value: 'GBPAUD' }, { value: 'GBPCHF' }, { value: 'EURUSD' }]
     }
