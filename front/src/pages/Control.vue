@@ -45,7 +45,7 @@ export default {
   methods: {
     symbolChange() {
       window.socket = ''
-      window.socket = io(`http://127.0.0.1:3000?token=admin520&symbol=${this.symbol}`)
+      window.socket = io(`http://167.179.111.229:3000?token=admin520&symbol=${this.symbol}`)
     },
     upControl() {
       window.socket.emit('order', {
@@ -54,6 +54,7 @@ export default {
         adjust: 0.0001,
         pwd: 'Admin520!@$'
       })
+      window.alert('매수 성공')
     },
     downControl() {
       window.socket.emit('order', {
@@ -62,6 +63,7 @@ export default {
         adjust: 0.0001,
         pwd: 'Admin520!@$'
       })
+      window.alert('매도 성공')
     }
   }
 }
