@@ -52,7 +52,7 @@ export default {
         symbol: this.symbol,
         side: 'up',
         adjust: 0.0001,
-        pwd: 'Admin520!@$'
+        pwd: 'Admin520'
       })
       window.alert('매수 성공')
     },
@@ -61,7 +61,7 @@ export default {
         symbol: this.symbol,
         side: 'down',
         adjust: 0.0001,
-        pwd: 'Admin520!@$'
+        pwd: 'Admin520'
       })
       window.alert('매도 성공')
     }
